@@ -26,6 +26,9 @@ const recommendedBook = () => {
   setOpenModal(true);
   setRandomNum(Math.floor(Math.random() * 11))
 }
+function reloadPage() {
+  window.location.reload(false);
+}
 
  if(openModal) {
    return <Modal booksInfo={booksInfo} openModal={openModal} setOpenModal={setOpenModal} randomNum={randomNum}/>
@@ -41,7 +44,12 @@ const recommendedBook = () => {
         <Search 
           search={search}
         />
-        <button onClick={recommendedBook} disabled={disabled}>Search the books and chose recommended</button>
+        {booksInfo ? (
+          <button onClick={recommendedBook} disabled={disabled}>Search the books and chose recommended</button>
+        ) : (
+          <button onClick={reloadPage} disabled={disabled}>No books with that name! Try again!</button>
+        )}
+        
         </div>
         <BookList 
           booksInfo={booksInfo}

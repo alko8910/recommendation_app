@@ -1,7 +1,7 @@
 import React from 'react'
 import Book from './Book'
 
-const BookList = ({booksInfo}) => {
+const BookList = ({booksInfo = []}) => {
     return (
         <div className='book-container'>
             {booksInfo.map((book, i) => (
