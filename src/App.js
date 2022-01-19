@@ -4,14 +4,13 @@ import './App.css';
 import BookList from './components/BookList';
 import Search from './components/Search';
 import Modal from './components/Modal';
-import Button from '@mui/material/Button'
 
 function App() {
 const [booksInfo, setBooksInfo] = useState([])
 const [openModal, setOpenModal] = useState(false);
 const [randomNum, setRandomNum] = useState();
 const [disabled, setDisabled] = useState(true)
-
+const [message, setMessage] = useState()
 
 const search = async (keyword) => {
   const response = await getBooks.get("/search", {
@@ -21,6 +20,7 @@ const search = async (keyword) => {
   })
 setBooksInfo(response.data.items)
 setDisabled(false)
+setMessage('')
 }
 
 const recommendedBook = () => {
@@ -38,19 +38,22 @@ function reloadPage() {
     <div className="App">
       <div className='center'>
         <div  className='main-div'>
-        <div>
-          <div>Book Recommender</div>
-          <div>Which book should you read?</div>
-        </div>
-        <Search 
-          search={search}
-        />
-        {booksInfo ? (
-          <button onClick={recommendedBook} disabled={disabled} className='search-random-book' >Search the books and chose recommended</button>
-        ) : (
-          <button onClick={reloadPage} disabled={disabled} className='search-random-book'>No books with that name! Try again!</button>
-        )}
-        
+          <div>
+            <div>Book Recommender</div>
+            <div>Which book should you read?</div>
+          </div>
+          <Search 
+            search={search}
+            setMessage={setMessage}
+          />
+          <div style={{fontSize: 'larger'}}>
+            {message}
+          </div>
+            {booksInfo ? (
+              <button onClick={recommendedBook} disabled={disabled} className='search-random-book' >Search the books and chose recommended</button>
+            ) : (
+              <button onClick={reloadPage} disabled={disabled} className='search-random-book'>No books with that name! Try again!</button>
+            )}
         </div>
         <BookList 
           booksInfo={booksInfo}
