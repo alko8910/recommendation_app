@@ -5,7 +5,14 @@ function Search({search}) {
 
 const handleChange = (e) => {
     e.preventDefault();
-    search(word)
+    {(!word) ? alert ('Please eneter a book title') : search(word)}
+    /*
+    if(!word){
+        alert('Please eneter a book title')
+    }else{
+        search(word)
+    }
+    */
 }
     return (
         <form onSubmit={handleChange}>

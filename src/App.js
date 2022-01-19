@@ -4,6 +4,7 @@ import './App.css';
 import BookList from './components/BookList';
 import Search from './components/Search';
 import Modal from './components/Modal';
+import Button from '@mui/material/Button'
 
 function App() {
 const [booksInfo, setBooksInfo] = useState([])
@@ -45,9 +46,9 @@ function reloadPage() {
           search={search}
         />
         {booksInfo ? (
-          <button onClick={recommendedBook} disabled={disabled}>Search the books and chose recommended</button>
+          <button onClick={recommendedBook} disabled={disabled} className='search-random-book' >Search the books and chose recommended</button>
         ) : (
-          <button onClick={reloadPage} disabled={disabled}>No books with that name! Try again!</button>
+          <button onClick={reloadPage} disabled={disabled} className='search-random-book'>No books with that name! Try again!</button>
         )}
         
         </div>
